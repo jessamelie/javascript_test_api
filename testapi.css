@@ -4,5 +4,6 @@
 }
 
 .card {
-margin : 50px;
+margin : 60px;
+display: inline-block;
 }
