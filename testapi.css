@@ -1,9 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&family=Josefin+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+section{
+    width: 100%
+}
+
+section nav {
+    display: flex;
+    height: 80px;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed; 
+    right: 0;
+    left: 0;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+section nav .title{
+   font-family: Cabin Sketch; 
+}
+
+section nav .logo img{
+    width: 130px;
+
+}
+
+section nav ul li a{
+    text-decoration: none;
+    margin: 0 100px;
+    color:black;
+    font-weight: 1000px;
+}
+
+section .main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 130px;
+    left: 20px;
+
+}
+
+
+.carousel-inner {
+    height: 550px;
+  }
+
+.carousel-inner .carousel-item img{
+    width:550px;
+    height:550px;
+    object-fit: cover;
+}
+
+p{
+    width: 600px;
+    text-align:justify;
+    position: relative;
+    left: 700px;
+    right: 1000px;
+    bottom: 300px;
+    line-height: 22px;
+    font-family:Josefin Sans;
+    font-size: 20px; 
+    color: black;
+}
+
 .input-group {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    width: 500px;
+    margin: 10px 50px 20px;
+    left: 650px;
+    right: 100px;
+    bottom: 250px;
 }
 
 .card {
-margin : 60px;
+margin : 0px;
 display: inline-block;
+}
+
+.bottombutton {
+    color: dimgray;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+#bottombtn {
+  position: fixed;
+  bottom: -4px;
+  right: 10px;  
 }

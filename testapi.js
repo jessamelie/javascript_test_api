@@ -1,30 +1,42 @@
-let searchBtnTxt = document.getElementById("searchbar");        //input de la recherche 
+let searchBtnTxt = document.querySelector("#searchbar");        //input de la recherche 
 let recipeCard = document.querySelector("#content");           //affichage des résultats sous forme de card
+let recipeInput = "";
 
-//stockage de la valeur ajoutée par l'user
+//RECUPERATION DE L'INPUT USER
 const recipesearch = () => {
-recipeInput = searchBtnTxt.value;
-console.log(recipeInput)
-}
+    recipeInput = searchBtnTxt.value;
+    console.log(recipeInput)
+//en cas de recherche vide
+    if (searchBtnTxt.value == ""){
+        alert("Hmmm ... Input field cannot be empty!")
+    }else{
+        sendAPIrequest(recipeInput)
+        // searchBtnTxt.value = "";
+    }
+    }
 
-//ajout d'un event pour l'envoi de recherche à l'API quand le bouton "Let's see" est appuyé
-document.getElementById("searchbtn").addEventListener("click",() => {
-console.log("button pressed")
-sendAPIrequest()
-})
+//VALIDATION INPUT RECHERCHE VIA TOUCHE ENTREE
+searchBtnTxt.addEventListener("keypress",(event) => { 
+     if (event.key === "Enter"){
+        recipesearch()
+    }
+     })
 
- //envoi d'une requête à l'API via une fonction asyncrone
-async function sendAPIrequest(){
+//SUPPRESSION DE LA RECHERCHE PRECEDENTE
+// document.querySelector("#content").innerHTML = ""
+
+ //DECLARATION DE L'ENVOI REQUETE API FOOD EDADAM
+async function sendAPIrequest(recipeInput){
     let APIid = "69b8e93b";
     let APIkey = "c9edfa40e90e0c811539bfcf66ebf85b"
-    let responseAPI = await fetch(`https://api.edamam.com/search?app_id=${APIid}&app_key=${APIkey}&q=${recipeInput}`);
-//extraction des données
+    let baseURL = `https://api.edamam.com/search?app_id=${APIid}&app_key=${APIkey}&q=${recipeInput}&to=20`
+    let responseAPI = await fetch(baseURL);
+//EXTRACTION DES DONNEES
     let data = await responseAPI.json()
     useAPIdata(data)
-    console.log(data)
 }
 
-//fonction qui permet de manipuler les données 
+//MANIPULATION DES DONNEES
 function useAPIdata (data) {
     for (let i=0; i<data.hits.length; i++){
         recipeCard.innerHTML +=`
@@ -33,9 +45,15 @@ function useAPIdata (data) {
   <div class="card-body">
     <h5 class="card-title">${data.hits[i].recipe.label}</h5>
     <p class="card-text">Meal Type: ${data.hits[i].recipe.mealType}</p>
-    <a href="${data.hits[i].recipe.url}" class="btn btn-primary">Recipe</a>
+    <a href="${data.hits[i].recipe.url}" class="btn btn-primary">Get Recipe</a>
   </div>
 </div>
 `
     }
+}
+
+//SUPPRESSION DE LA DIV/CONTENT APRES RECHERCHE
+const clearContent = () => {
+    searchBtnTxt.value = ""
+    recipeCard.innerHTML =""
 }
