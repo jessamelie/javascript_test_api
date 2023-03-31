@@ -88,8 +88,11 @@ p{
 }
 
 .card {
-margin : 0px;
+margin : 12px;
 display: inline-block;
+height:500px;
+border-radius: 4px;
+align-self: stretch;
 }
 
 .bottombutton {
